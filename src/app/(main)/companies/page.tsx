@@ -10,7 +10,6 @@ import {Toolbar} from 'primereact/toolbar';
 import {classNames} from 'primereact/utils';
 import React, {useEffect, useRef, useState} from 'react';
 import {CompanyService} from '../../../service/CompanyService';
-import {useRouter} from "next/navigation";
 import {Company} from "../../../service/types/company/Company";
 import {FileUpload, FileUploadSelectEvent} from "primereact/fileupload";
 import {pdfjs} from "react-pdf";
@@ -23,6 +22,8 @@ import {FinancialService} from "../../../service/FinancialService";
 import {PartnershipService} from "../../../service/PartnershipService";
 import {useUser} from "../../../layout/context/usercontext";
 import {useTranslation} from "react-i18next";
+import {BookkeepingFormat} from "../../../service/types/company/BookkeepingFormat";
+import {InvestmentStatus} from "../../../service/types/company/InvestmentStatus";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
@@ -31,13 +32,16 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const CompanyCrud = () => {
 
-    const router = useRouter();
     let emptyCompany: Company = {
+        turnover: 0,
         name: '',
         taxNo: '',
         taxAdministration: '',
         tradeRegisterNo: '',
         contact: new Contact(),
+        bookkeepingFormat: BookkeepingFormat.VUK,
+        investmentStatus: InvestmentStatus.NO_INVESTMENT,
+        employeeNumber: 0
     };
 
     const [companies, setCompanies] = useState<Company[]>();
@@ -57,6 +61,7 @@ const CompanyCrud = () => {
 
     useEffect(() => {
         if (!user.loadingUser && user.current != null) {
+            debugger
             if (!(user.current as any).labels.includes("admin")) {
                 CompanyService.list().then((data) => {
                     setCompanies(data.documents as any)
@@ -443,7 +448,7 @@ const CompanyCrud = () => {
                         <label htmlFor="name"
                                className={classNames({'p-error': isFormFieldValid('name')})}>{t('name')}*</label>
                     </span>
-                    {getFormErrorMessage('name')}
+                    {getFormErrorMessage('name' )}
                 </div>
 
                 <div className="field col-12 md:col-6">

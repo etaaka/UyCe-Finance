@@ -21,9 +21,16 @@ const AppMenu = () => {
         {
             label: t('menu.company.information'),
             items: [
-                { label: t('menu.company'), icon: 'pi pi-fw pi-briefcase', to: '/companies'},
-                { label: t('menu.partnerships'), icon: 'pi pi-fw pi-percentage', to: '/partnerships'},
-                { label: t('menu.financials'), icon: 'pi pi-fw pi-money-bill', to: '/financials'}
+                { label: t('menu.company'), icon: 'pi pi-fw pi-briefcase', to: '/company'},
+                { label: t('menu.partnerships'), icon: 'pi pi-fw pi-percentage', to: '/company/partnerships'},
+                { label: t('menu.financials'), icon: 'pi pi-fw pi-money-bill', to: '/company/financials'},
+                { label: t('menu.files'), icon: 'pi pi-fw pi-money-bill', to: '/company/files'}
+            ]
+        },
+        {
+            label: t('menu.analysis'),
+            items: [
+                { label: t('menu.report'), icon: 'pi pi-fw pi-briefcase', to: '/reports'}
             ]
         },
     ];

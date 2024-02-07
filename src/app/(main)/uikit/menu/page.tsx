@@ -506,7 +506,7 @@ const MenuDemo = ({ children }: any) => {
                 <div className="card">
                     <h5>Steps</h5>
                     <Steps model={wizardItems} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
-                    {pathname === '/uikit/menu' ? (
+                    {pathname === '/company' ? (
                         <div className="flex align-items-center py-5 px-3">
                             <i className="pi pi-fw pi-user mr-2 text-2xl" />
                             <p className="m-0 text-lg">Personal Component Content via Child Route</p>

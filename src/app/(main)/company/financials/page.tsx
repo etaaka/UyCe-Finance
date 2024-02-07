@@ -10,18 +10,18 @@ import {Toast} from 'primereact/toast';
 import {Toolbar} from 'primereact/toolbar';
 import {classNames} from 'primereact/utils';
 import React, {useEffect, useRef, useState} from 'react';
-import {FinancialService} from '../../../service/FinancialService';
-import {Financial} from "../../../service/types/financial/Financial";
-import {Company} from "../../../service/types/company/Company";
+import {FinancialService} from '../../../../service/FinancialService';
+import {Financial} from "../../../../service/types/financial/Financial";
+import {Company} from "../../../../service/types/company/Company";
 import {TreeTable} from "primereact/treetable";
 import {TreeNode} from "primereact/treenode";
 import {Nullable} from "primereact/ts-helpers";
-import {FinancialLineType} from "../../../service/types/financial/line/FinancialLineType";
-import {FinancialLine} from "../../../service/types/financial/line/FinancialLine";
-import {FinancialLineService} from "../../../service/FinancialLineService";
+import {FinancialLineType} from "../../../../service/types/financial/line/FinancialLineType";
+import {FinancialLine} from "../../../../service/types/financial/line/FinancialLine";
+import {FinancialLineService} from "../../../../service/FinancialLineService";
 import {Card} from "primereact/card";
 import {useRouter} from "next/navigation";
-import {useUser} from "../../../layout/context/usercontext";
+import {useUser} from "../../../../layout/context/usercontext";
 import {useTranslation} from "react-i18next";
 
 const FinancialCrud = () => {

@@ -1,17 +1,25 @@
-import {Financial} from "../financial/Financial";
 import {Contact} from "../contact/Contact";
-import {Partnership} from "../partnership/Partnership";
+import {BookkeepingFormat} from "./BookkeepingFormat";
+import {InvestmentStatus} from "./InvestmentStatus";
+import {Sector} from "./Sector";
 
 export class Company {
     $id?: string;
+    $databaseId?: string;
+    $collectionId?: string;
     $createdAt?: string;
     $updatedAt?: string;
     name: string= '';
     establishmentDate?: Date
-    activityAreaCodes? : string[]
+    taxNo : string = ''
+    taxAdministration? : string = ''
+    sector? : Sector= Sector.A
+    tradeRegisterNo?: string= ''
+    bookkeepingFormat : BookkeepingFormat = BookkeepingFormat.VUK
+    investmentStatus : InvestmentStatus = InvestmentStatus.NO_INVESTMENT
+    turnover : number = 0
+    employeeNumber : number = 0
+
     userId?: string;
-    taxNo: string = ''
-    taxAdministration: string = ''
-    tradeRegisterNo?: string
     contact: Contact = new Contact();
 }

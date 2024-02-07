@@ -10,16 +10,16 @@ import {Toast} from 'primereact/toast';
 import {Toolbar} from 'primereact/toolbar';
 import {classNames} from 'primereact/utils';
 import React, {useEffect, useRef, useState} from 'react';
-import {PartnershipService} from '../../../service/PartnershipService';
-import {Partnership} from "../../../service/types/partnership/Partnership";
+import {PartnershipService} from '../../../../service/PartnershipService';
+import {Partnership} from "../../../../service/types/partnership/Partnership";
 import {Slider} from "primereact/slider";
 import {MultiSelect} from "primereact/multiselect";
-import {Contact} from "../../../service/types/contact/Contact";
+import {Contact} from "../../../../service/types/contact/Contact";
 import {Chips} from "primereact/chips";
 import {InputTextarea} from "primereact/inputtextarea";
 import {InputMask} from "primereact/inputmask";
 import {useRouter} from "next/navigation";
-import {useUser} from "../../../layout/context/usercontext";
+import {useUser} from "../../../../layout/context/usercontext";
 import {useTranslation} from "react-i18next";
 
 const PartnershipCrud = () => {

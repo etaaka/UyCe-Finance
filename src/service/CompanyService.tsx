@@ -8,11 +8,38 @@ import {Partnership} from "./types/partnership/Partnership";
 import {Contact} from "./types/contact/Contact";
 import {PartnershipDuty} from "./types/partnership/PartnershipDuty";
 import {PartnershipService} from "./PartnershipService";
+import {BookkeepingFormat} from "./types/company/BookkeepingFormat";
+import {InvestmentStatus} from "./types/company/InvestmentStatus";
+import {Sector} from "./types/company/Sector";
 
 export const COMPANIES_DATABASE_ID = "654769c9344dffc7dd50";
 export const COMPANIES_COLLECTION_ID = "654769cf447df20d3035";
 
 export const CompanyService = {
+    getSectors(t: any) {
+        let list = []
+        for (let sector in Sector) {
+            list.push({ name: t('Sector.' + sector), code: sector })
+        }
+        return list
+    },
+
+    getBookkeepingFormats(t: any) {
+        let list = []
+        for (let bookformat in BookkeepingFormat) {
+            list.push({ name: t('BookkeepingFormat.' + bookformat), code: bookformat })
+        }
+        return list
+    },
+
+    getInvestmentStatutes(t: any) {
+        let list = []
+        for (let investmentStatus in InvestmentStatus) {
+            list.push({ name: t('InvestmentStatus.' + investmentStatus), code: investmentStatus })
+        }
+        return list
+    },
+
     async getCompanies() {
         let res = await fetch('/demo/data/companies.json', {headers: {'Cache-Control': 'no-cache'}});
         let d: any = await res.json();
@@ -54,6 +81,8 @@ export const CompanyService = {
     },
 
     async update(id: string, data: Company) {
+        delete  data.$databaseId
+        delete  data.$collectionId
         return await databases.updateDocument(COMPANIES_DATABASE_ID, COMPANIES_COLLECTION_ID, id, {...data})
     },
 

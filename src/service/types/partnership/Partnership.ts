@@ -12,6 +12,7 @@ export class Partnership {
     passport?: string
     shareRatio?: number
     duties : PartnershipDuty[] = []
+    duty? : PartnershipDuty
     contact : Contact = new Contact()
 }
 

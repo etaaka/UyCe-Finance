@@ -6,9 +6,7 @@ import React, {forwardRef, useContext, useEffect, useImperativeHandle, useRef, u
 import { AppTopbarRef } from '../service/types/types';
 import { LayoutContext } from './context/layoutcontext';
 import {useUser} from "./context/usercontext";
-import {redirect, useRouter} from "next/navigation";
-import {Company} from "../service/types/company/Company";
-import {CompanyService} from "../service/CompanyService";
+import {redirect} from "next/navigation";
 import {useTranslation} from "react-i18next";
 
 const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {

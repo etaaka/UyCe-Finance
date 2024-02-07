@@ -9,4 +9,3 @@ export class Contact {
     email: string  = "";
     website?: string = "";
 }
-

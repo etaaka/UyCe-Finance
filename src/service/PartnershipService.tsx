@@ -17,12 +17,6 @@ export const PartnershipService = {
         return list
     },
 
-    async getPartnerships() {
-        let res = await fetch('/demo/data/financials.json', {headers: {'Cache-Control': 'no-cache'}});
-        let d: any = await res.json();
-        return d.data as Partnership[];
-    },
-
     async list(queries: string[] = []) {
         queries.push(Query.orderDesc("$createdAt"), Query.limit(10))
         return await databases.listDocuments(
