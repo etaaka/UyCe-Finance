@@ -9,7 +9,6 @@ import { classNames } from 'primereact/utils';
 import {LayoutContext} from "../../../../layout/context/layoutcontext";
 import {useUser} from "../../../../layout/context/usercontext";
 import Link from "next/link";
-import {Panel} from "primereact/panel";
 
 const LoginPage = () => {
     const [email, setEmail] = useState(localStorage.getItem("email") || "");
