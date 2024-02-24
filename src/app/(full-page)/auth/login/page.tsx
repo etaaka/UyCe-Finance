@@ -11,8 +11,8 @@ import {useUser} from "../../../../layout/context/usercontext";
 import Link from "next/link";
 
 const LoginPage = () => {
-    const [email, setEmail] = useState(localStorage.getItem("email") || "");
-    const [password, setPassword] = useState(localStorage.getItem("password") || "");
+    const [email, setEmail] = useState( "");
+    const [password, setPassword] = useState( "");
     const [checked, setChecked] = useState(false);
     const { layoutConfig } = useContext(LayoutContext);
 
@@ -25,6 +25,8 @@ const LoginPage = () => {
                 window.location.replace("/")
             }
         }
+        setEmail(localStorage.getItem("email") as string)
+        setPassword(localStorage.getItem("password") as string)
     }, [user.current, user.loadingUser]);
 
     return (
