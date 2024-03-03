@@ -9,6 +9,27 @@ import { classNames } from 'primereact/utils';
 import React, { useContext, useEffect, useState } from 'react';
 import { AppConfigProps, LayoutConfig, LayoutState } from '../service/types/types';
 import { LayoutContext } from './context/layoutcontext';
+import {initReactI18next, useTranslation} from "react-i18next";
+import i18n from "i18next";
+
+i18n.use(initReactI18next).init(
+    {
+        fallbackLng: 'tr',
+        lng: 'tr',
+        resources: {
+            en: {
+                translations: require('./../i18n/locales/en/translations.json')
+            },
+            tr: {
+                translations: require('./../i18n/locales/tr/translations.json')
+            }
+        },
+        ns: ['translations'],
+        defaultNS: 'translations'
+    }
+);
+
+i18n.languages = ['en', 'tr'];
 
 const AppConfig = (props: AppConfigProps) => {
     const [scales] = useState([12, 13, 14, 15, 16]);

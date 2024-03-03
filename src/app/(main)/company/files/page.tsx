@@ -118,6 +118,8 @@ const FileCrud = () => {
                 }).catch(e => {
                     debugger
                     console.log(e)
+                }).finally(() => {
+                    setSubmitted(false)
                 })
             } else {
                 CompanyFileService.add(_companyFile as CompanyFile).then(r => {
@@ -133,13 +135,14 @@ const FileCrud = () => {
                 }).catch(e => {
                     debugger
                     console.log(e)
+                }).finally(() => {
+                    setSubmitted(false)
                 })
             }
         }
     };
 
     const editCompanyFile = (companyFile: CompanyFile) => {
-
         setCompanyFile({...companyFile} as CompanyFile);
         let url = StorageService.getResourceUrl(companyFile.$id!, COMPANY_FILE_BUCKET)
         setFileUrl(url.href)
@@ -152,6 +155,7 @@ const FileCrud = () => {
     };
 
     const deleteCompanyFile = () => {
+        setSubmitted(true)
         let _companyFiles = companyFiles?.filter((val: CompanyFile) => val.$id !== companyFile.$id);
         CompanyFileService.remove(companyFile.$id as string).then(r => {
             setCompanyFiles(_companyFiles as CompanyFile[]);
@@ -159,6 +163,8 @@ const FileCrud = () => {
             setCompanyFile(emptyCompanyFile);
             setFile(undefined)
             toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_deleted'), life: 3000});
+        }).finally(() => {
+            setSubmitted(false)
         })
     };
 
@@ -187,6 +193,7 @@ const FileCrud = () => {
     };
 
     const deleteSelectedCompanyFiles = () => {
+        setSubmitted(true)
         let _companyFiles = companyFiles?.filter((val: CompanyFile) => !selectedCompanyFiles?.includes(val));
 
         CompanyFileService.removeAll(selectedCompanyFiles!.map((val: CompanyFile) => val.$id!)).then(r => {
@@ -194,6 +201,8 @@ const FileCrud = () => {
             setDeleteCompanyFilesDialog(false);
             setSelectedCompanyFiles([]);
             toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_deleted'), life: 3000});
+        }).finally(() => {
+            setSubmitted(false)
         })
     };
 

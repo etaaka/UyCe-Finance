@@ -7,7 +7,6 @@ import {
 import {account} from "../../service/appwrite";
 import {useRouter} from "next/navigation";
 import {ID, Models} from "appwrite";
-import {Toast} from "primereact/toast";
 import {Company} from "../../service/types/company/Company";
 
 const UserContext = createContext({} as UserContextProps);
@@ -20,10 +19,10 @@ export interface UserContextProps {
     current: Models.Session | null;
     company: Company | null;
     selectCompany: (company: Company) => Promise<void>;
-    login: (email: string, password: string, rememberMe: boolean) => Promise<void>;
+    login: (email: string, password: string) => Promise<Models.Session>;
     logout: () => Promise<void>;
-    createRecovery: (email: string, url: string) => Promise<Models.Token>;
-    register: (email: string, password: string) => Promise<void>;
+    createRecovery: (email: string) => Promise<Models.Token>;
+    register: (email: string, password: string) =>   Promise<Models.User<Models.Preferences>>;
     updateRecovery: (password: string, password2: string)=> Promise<void>;
     loadingUser: Boolean;
 }
@@ -34,18 +33,9 @@ export function UserProvider(props: { children: any }) {
     const [loadingUser, setLoadingUser] = useState(true)
 
     const router = useRouter();
-    const toast = useRef<Toast>(null);
 
-    async function login(email: string, password: string, rememberMe: boolean) {
-        const loggedIn = await account.createEmailSession(email, password);
-        setUser(loggedIn as any);
-
-        if(rememberMe){
-            localStorage.setItem("email", email); localStorage.setItem("password", password)
-        }
-
-        toast.current?.show({severity: 'success', summary: 'Logined', detail: 'Login successful', life: 3000});
-        router.push('/');
+    async function login(email: string, password: string) {
+        return  account.createEmailSession(email, password);
     }
 
     async function selectCompany(company: Company){
@@ -53,8 +43,8 @@ export function UserProvider(props: { children: any }) {
         setCompany(company)
     }
 
-    async function createRecovery(email: string, url: string) {
-        let token = await account.createRecovery(email, url);
+    async function createRecovery(email: string) {
+        let token = await account.createRecovery(email, window.location.origin + '/auth/verify');
 
         router.push(`/auth/login`)
         return token
@@ -77,8 +67,7 @@ export function UserProvider(props: { children: any }) {
     }
 
     async function register(email: string, password: string) {
-        await account.create(ID.unique(), email, password);
-        await login(email, password, false);
+        return account.create(ID.unique(), email, password);
     }
 
     async function init() {

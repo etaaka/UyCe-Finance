@@ -133,6 +133,8 @@ const ReportCrud = () => {
                     setReports(_reports as any);
                     setReport(emptyReport);
                     setReportDialog(false);
+                }).finally(() => {
+                    setSubmitted(false)
                 })
             } else {
                 ReportService.add(_report).then(r => {
@@ -144,6 +146,8 @@ const ReportCrud = () => {
                 }).catch(e => {
                     debugger
                     console.log(e)
+                }).finally(() => {
+                    setSubmitted(false)
                 })
             }
         }
@@ -354,7 +358,7 @@ const ReportCrud = () => {
                                       onChange={(e) => onInputChange(e, 'reportDate')}
                                       className={classNames({'p-error': isFormFieldValid('reportDate')})}/>
                             <label htmlFor="reportDate"
-                                   className={classNames({'p-error': isFormFieldValid('reportDate')})}>{t('company.reportDate')}*</label>
+                                   className={classNames({'p-error': isFormFieldValid('reportDate')})}>{t('report.date')}*</label>
                         </span>
                         {getFormErrorMessage('reportDate')}
                     </div>

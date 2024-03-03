@@ -1,19 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import React, { useContext, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
 import { classNames } from 'primereact/utils';
 import {LayoutContext} from "../../../../layout/context/layoutcontext";
 import {useUser} from "../../../../layout/context/usercontext";
+import {CompanyService} from "../../../../service/CompanyService";
+import {Contact} from "../../../../service/types/contact/Contact";
+import {useRouter} from "next/navigation";
 
-const LoginPage = () => {
+const VerifyPage = () => {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const { layoutConfig } = useContext(LayoutContext);
 
     const user = useUser();
+    const router = useRouter();
     const containerClassName = classNames('surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden', { 'p-input-filled': layoutConfig.inputStyle === 'filled' });
+
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const secret = urlParams.get('secret');
+        const userId = urlParams.get('userId');
+        if (!secret && !userId) {
+            router.push('/')
+        }
+    }, []);
+
 
     return (
         <div className={containerClassName}>
@@ -49,4 +63,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default VerifyPage;

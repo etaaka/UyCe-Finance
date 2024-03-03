@@ -72,13 +72,14 @@ const CompanyComponent = () => {
         setErrors(errors)
         if (errors.size == 0) {
             let _company = {...company};
-            debugger
             if (company.$id) {
                 CompanyService.update(company.$id, _company).then(r => {
                     toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_updated'), life: 3000})
                 }).catch(e => {
                     debugger
                     console.log(e)
+                }).finally(() => {
+                    setSubmitted(false)
                 })
             } else {
                 CompanyService.add(_company).then(r => {
@@ -86,6 +87,8 @@ const CompanyComponent = () => {
                 }).catch(e => {
                     debugger
                     console.log(e)
+                }).finally(() => {
+                    setSubmitted(false)
                 })
             }
         }

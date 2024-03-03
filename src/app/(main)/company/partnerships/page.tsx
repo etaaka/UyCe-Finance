@@ -15,7 +15,6 @@ import {Partnership} from "../../../../service/types/partnership/Partnership";
 import {Slider} from "primereact/slider";
 import {MultiSelect} from "primereact/multiselect";
 import {Contact} from "../../../../service/types/contact/Contact";
-import {Chips} from "primereact/chips";
 import {InputTextarea} from "primereact/inputtextarea";
 import {InputMask} from "primereact/inputmask";
 import {useRouter} from "next/navigation";
@@ -133,6 +132,8 @@ const PartnershipCrud = () => {
                 }).catch(e => {
                     debugger
                     console.log(e)
+                }).finally(() => {
+                    setSubmitted(false)
                 })
             } else {
                 debugger
@@ -145,6 +146,8 @@ const PartnershipCrud = () => {
                 }).catch(e => {
                     debugger
                     console.log(e)
+                }).finally(() => {
+                    setSubmitted(false)
                 })
             }
         }
@@ -161,12 +164,15 @@ const PartnershipCrud = () => {
     };
 
     const deletePartnership = () => {
+        setSubmitted(true)
         let _partnerships = partnerships?.filter((val: Partnership) => val.$id !== partnership.$id);
         PartnershipService.remove(partnership.$id as string).then(r => {
             setPartnerships(_partnerships as Partnership[]);
             setDeletePartnershipDialog(false);
             setPartnership(emptyPartnership);
             toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_deleted'), life: 3000});
+        }).finally(() => {
+            setSubmitted(false)
         })
     };
 
@@ -191,12 +197,14 @@ const PartnershipCrud = () => {
 
     const deleteSelectedPartnerships = () => {
         let _partnerships = partnerships?.filter((val: Partnership) => !selectedPartnerships?.includes(val));
-
+setSubmitted(true)
         PartnershipService.removeAll(selectedPartnerships!.map((val: Partnership) => val.$id!)).then(r => {
             setPartnerships(_partnerships as Partnership[])
             setDeletePartnershipsDialog(false);
             setSelectedPartnerships([]);
             toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_deleted'), life: 3000});
+        }).finally(() => {
+            setSubmitted(false)
         })
     };
 

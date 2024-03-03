@@ -12,7 +12,6 @@ import {classNames} from 'primereact/utils';
 import React, {useEffect, useRef, useState} from 'react';
 import {FinancialService} from '../../../../service/FinancialService';
 import {Financial} from "../../../../service/types/financial/Financial";
-import {Company} from "../../../../service/types/company/Company";
 import {TreeTable} from "primereact/treetable";
 import {TreeNode} from "primereact/treenode";
 import {Nullable} from "primereact/ts-helpers";
@@ -106,6 +105,8 @@ const FinancialCrud = () => {
             }).catch(e =>{
                 debugger
                 console.log(e)
+            }).finally(() => {
+                setSubmitted(false)
             })
         } else {
             FinancialService.add(_financial as Financial).then(r => {
@@ -117,6 +118,8 @@ const FinancialCrud = () => {
             }).catch(e => {
                 debugger
                 console.log(e)
+            }).finally(() => {
+                setSubmitted(false)
             })
         }
     };
@@ -132,12 +135,15 @@ const FinancialCrud = () => {
     };
 
     const deleteFinancial = () => {
+        setSubmitted(true)
         let _financials = (financials as any)?.filter((val: any) => val.id !== financial.$id);
         FinancialService.remove(financial.$id as string).then(r => {
             setFinancials(_financials);
             setDeleteFinancialDialog(false);
             setFinancial(emptyFinancial);
             toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_deleted'), life: 3000});
+        }).finally(() => {
+            setSubmitted(false)
         })
     };
 
@@ -174,12 +180,14 @@ const FinancialCrud = () => {
 
     const deleteSelectedFinancials = () => {
         let _financials = (financials as any)?.filter((val: any) => !(selectedFinancials as any)?.includes(val));
-
+        setSubmitted(true)
         FinancialService.removeAll((selectedFinancials as Financial[]).map((val: any) => val.$id)).then(r => {
             setFinancials(_financials);
             setDeleteFinancialsDialog(false);
             setSelectedFinancials([]);
             toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_deleted'), life: 3000});
+        }).finally(() => {
+            setSubmitted(false)
         })
     };
 

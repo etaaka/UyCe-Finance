@@ -145,6 +145,8 @@ const CompanyCrud = () => {
                     setCompanies(_companies as any);
                     setCompanyDialog(false);
                     setCompany(emptyCompany);
+                }).finally(() => {
+                    setSubmitted(false)
                 })
             } else {
                 CompanyService.add(_company).then(r => {
@@ -156,6 +158,8 @@ const CompanyCrud = () => {
                 }).catch(e => {
                     debugger
                     console.log(e)
+                }).finally(() => {
+                    setSubmitted(false)
                 })
             }
         }
