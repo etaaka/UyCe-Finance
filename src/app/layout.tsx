@@ -17,6 +17,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <html lang="en" suppressHydrationWarning>
             <head>
                 <link id="theme-css" href={`/themes/lara-light-indigo/theme.css`} rel="stylesheet"></link>
+                <title>Uyce Finance</title>
             </head>
             <body>
                 <PrimeReactProvider>
