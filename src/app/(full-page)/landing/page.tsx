@@ -95,7 +95,7 @@ const LandingPage = () => {
                     <div className="grid justify-content-center">
                         <div className="col-12 text-center mt-8 mb-4">
                             <h2 className="text-900 font-normal mb-2">{t('landing.features.title')}</h2>
-                            <span className="text-600 text-2xl">{t('landing.features.details')}</span>
+                            {/*<span className="text-600 text-2xl">{t('landing.features.details')}</span>*/}
                         </div>
 
                         <div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
@@ -416,27 +416,27 @@ const LandingPage = () => {
                                 <h3 className="text-900 text-center my-5">{t('landing.pricing.free')}</h3>
                                 <img src="/demo/images/landing/free.svg" className="w-10 h-10 mx-auto" alt="free" />
                                 <div className="my-5 text-center">
-                                    <span className="text-5xl font-bold mr-2 text-900">{t('landing.pricing.free.price')}$0</span>
-                                    <span className="text-600">{t('landing.pricing.free.per')}per month</span>
-                                    <Button label="Get Started" rounded className="block mx-auto mt-4 border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
+                                    <span className="text-5xl font-bold mr-2 text-900">{t('landing.pricing.free.price')}</span>
+                                    <span className="text-600">{t('landing.pricing.free.per')}</span>
+                                    <Button label={t('landing.pricing.free.started')} rounded className="block mx-auto mt-4 border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
                                 </div>
                                 <Divider className="w-full bg-surface-200"></Divider>
                                 <ul className="my-5 list-none p-0 flex text-900 flex-column">
                                     <li className="py-2">
                                         <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Responsive Layout</span>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.free.feature.1')}</span>
                                     </li>
                                     <li className="py-2">
                                         <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Unlimited Push Messages</span>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.free.feature.2')}</span>
                                     </li>
                                     <li className="py-2">
                                         <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">50 Support Ticket</span>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.free.feature.3')}</span>
                                     </li>
                                     <li className="py-2">
                                         <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Free Shipping</span>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.free.feature.4')}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -444,30 +444,30 @@ const LandingPage = () => {
 
                         <div className="col-12 lg:col-4 p-0 md:p-3 mt-4 md:mt-0">
                             <div className="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all">
-                                <h3 className="text-900 text-center my-5">Startup</h3>
+                                <h3 className="text-900 text-center my-5">{t('landing.pricing.pro')}</h3>
                                 <img src="/demo/images/landing/startup.svg" className="w-10 h-10 mx-auto" alt="startup" />
                                 <div className="my-5 text-center">
-                                    <span className="text-5xl font-bold mr-2 text-900">$1</span>
-                                    <span className="text-600">per month</span>
-                                    <Button label="Try Free" rounded className="block mx-auto mt-4 border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
+                                    <span className="text-5xl font-bold mr-2 text-900">{t('landing.pricing.pro.price')}</span>
+                                    <span className="text-600">{t('landing.pricing.pro.per')}</span>
+                                    <Button label={t('landing.pricing.pro.started')} rounded className="block mx-auto mt-4 border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
                                 </div>
                                 <Divider className="w-full bg-surface-200"></Divider>
                                 <ul className="my-5 list-none p-0 flex text-900 flex-column">
                                     <li className="py-2">
                                         <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Responsive Layout</span>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.pro.feature.1')}</span>
                                     </li>
                                     <li className="py-2">
                                         <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Unlimited Push Messages</span>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.pro.feature.2')}</span>
                                     </li>
                                     <li className="py-2">
                                         <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">50 Support Ticket</span>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.pro.feature.3')}</span>
                                     </li>
                                     <li className="py-2">
                                         <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Free Shipping</span>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.pro.feature.4')}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -475,30 +475,34 @@ const LandingPage = () => {
 
                         <div className="col-12 lg:col-4 p-0 md:p-3 mt-4 md:mt-0">
                             <div className="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all">
-                                <h3 className="text-900 text-center my-5">Enterprise</h3>
+                                <h3 className="text-900 text-center my-5">{t('landing.pricing.enterprise')}</h3>
                                 <img src="/demo/images/landing/enterprise.svg" className="w-10 h-10 mx-auto" alt="enterprise" />
                                 <div className="my-5 text-center">
-                                    <span className="text-5xl font-bold mr-2 text-900">$999</span>
-                                    <span className="text-600">per month</span>
-                                    <Button label="Get a Quote" rounded className="block mx-auto mt-4 border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
+                                    <span className="text-5xl font-bold mr-2 text-900">{t('landing.pricing.enterprise.price')}</span>
+                                    {/*<span className="text-600">per month</span>*/}
+                                    <Button label={t('landing.pricing.enterprise.started')} rounded className="block mx-auto mt-4 border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
                                 </div>
                                 <Divider className="w-full bg-surface-200"></Divider>
                                 <ul className="my-5 list-none p-0 flex text-900 flex-column">
                                     <li className="py-2">
                                         <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Responsive Layout</span>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.enterprise.feature.1')}</span>
                                     </li>
                                     <li className="py-2">
                                         <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Unlimited Push Messages</span>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.enterprise.feature.2')}</span>
                                     </li>
                                     <li className="py-2">
                                         <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">50 Support Ticket</span>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.enterprise.feature.3')}</span>
                                     </li>
                                     <li className="py-2">
                                         <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Free Shipping</span>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.enterprise.feature.4')}</span>
+                                    </li>
+                                    <li className="py-2">
+                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
+                                        <span className="text-xl line-height-3">{t('landing.pricing.enterprise.feature.5')}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -523,7 +527,6 @@ const LandingPage = () => {
                                     <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">{t('landing.news')}</a>
                                     <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">{t('landing.investorRelations')}</a>
                                     <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">{t('landing.careers')}</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer text-700">{t('landing.mediaKit')}</a>
                                 </div>
 
                                 <div className="col-12 md:col-3 mt-4 md:mt-0">
@@ -535,7 +538,6 @@ const LandingPage = () => {
 
                                 <div className="col-12 md:col-3 mt-4 md:mt-0">
                                     <h4 className="font-medium text-2xl line-height-3 mb-3 text-900">{t('landing.community')}</h4>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">{t('landing.discord')}</a>
                                     <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">
                                         {t('landing.events')}
                                         <img src="/demo/images/landing/new-badge.svg" className="ml-2" alt="badge" />
