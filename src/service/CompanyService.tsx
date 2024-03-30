@@ -80,6 +80,25 @@ export const CompanyService = {
         );
     },
 
+    async listByTaxNo(taxNo: string, userId?:string) {
+        let query = [
+            Query.select(["$id","$createdAt","name","establishmentDate"]),
+        ]
+        query.push(
+            Query.equal("taxNo", taxNo)
+        )
+        if(userId != null){
+            query.push(
+                Query.equal("userId", userId)
+            )
+        }
+        return await databases.listDocuments(
+            COMPANIES_DATABASE_ID,
+            COMPANIES_COLLECTION_ID,
+            query
+        );
+    },
+
     async update(id: string, data: Company) {
         delete  data.$databaseId
         delete  data.$collectionId
