@@ -24,6 +24,8 @@ import {useUser} from "../../../layout/context/usercontext";
 import {useTranslation} from "react-i18next";
 import {BookkeepingFormat} from "../../../service/types/company/BookkeepingFormat";
 import {InvestmentStatus} from "../../../service/types/company/InvestmentStatus";
+import {Financial} from "../../../service/types/financial/Financial";
+import {Partnership} from "../../../service/types/partnership/Partnership";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
@@ -141,7 +143,12 @@ const CompanyCrud = () => {
                 CompanyService.update(company.$id, _company).then(r => {
                     let index = findIndexById(company.$id as string);
                     _companies[index] = _company;
-                    toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_updated'), life: 3000})
+                    toast.current?.show({
+                        severity: 'success',
+                        summary: t('successful'),
+                        detail: t('successful_updated'),
+                        life: 3000
+                    })
                     setCompanies(_companies as any);
                     setCompanyDialog(false);
                     setCompany(emptyCompany);
@@ -151,7 +158,12 @@ const CompanyCrud = () => {
             } else {
                 CompanyService.add(_company).then(r => {
                     _companies.push(r as any);
-                    toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_created'), life: 3000});
+                    toast.current?.show({
+                        severity: 'success',
+                        summary: t('successful'),
+                        detail: t('successful_created'),
+                        life: 3000
+                    });
                     setCompanies(_companies as any);
                     setCompanyDialog(false);
                     setCompany(emptyCompany);
@@ -184,7 +196,12 @@ const CompanyCrud = () => {
         setSubmitted(true)
         CompanyService.remove(company.$id as string).then(r => {
             setCompanies(_companies);
-            toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_deleted'), life: 3000});
+            toast.current?.show({
+                severity: 'success',
+                summary: t('successful'),
+                detail: t('successful_deleted'),
+                life: 3000
+            });
             setDeleteCompanyDialog(false);
             setCompany(emptyCompany);
         }).finally(() => {
@@ -219,7 +236,12 @@ const CompanyCrud = () => {
         let company = (selectedCompanies as Company[])[0]
         setCompanySelectDialog(false);
         setSelectedCompanies([]);
-        toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_selected'), life: 3000});
+        toast.current?.show({
+            severity: 'success',
+            summary: t('successful'),
+            detail: t('successful_selected'),
+            life: 3000
+        });
         user.selectCompany(company)
     };
 
@@ -230,7 +252,12 @@ const CompanyCrud = () => {
             setCompanies(_companies);
             setDeleteCompaniesDialog(false);
             setSelectedCompanies([]);
-            toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_deleted'), life: 3000});
+            toast.current?.show({
+                severity: 'success',
+                summary: t('successful'),
+                detail: t('successful_deleted'),
+                life: 3000
+            });
         }).finally(() => {
             setSubmitted(false)
         })
@@ -322,6 +349,62 @@ const CompanyCrud = () => {
         }
     }
 
+    function addNewCompanyInformations(company: Company, financials: Financial[], partnerships: Partnership[]) {
+        CompanyService.add(company).then(
+            async r => {
+                companies?.push(r as any)
+                setCompanies(companies);
+
+                console.log(`Company added, financials saving.`)
+                for (const f of financials) {
+                    f.companyId = r.$id
+                    await FinancialService.add(f)
+                }
+                console.log(`Financials added, partnerships saving.`)
+                for (const p of partnerships) {
+                    p.companyId = r.$id
+                    await PartnershipService.add(p)
+                }
+                toast.current?.show({
+                    severity: 'success',
+                    summary: t('successful'),
+                    detail: t('successful_created'),
+                    life: 3000
+                });
+            }).catch(e => {
+            debugger
+            console.log(e)
+        }).finally(() => {
+            setSubmitted(false)
+        })
+    }
+
+    function addNewFinancials(savedCompany: Company, newFinancials: Financial[]) {
+        FinancialService.listByCompanyId(savedCompany.$id!).then(
+            s => {
+                const newFinancialMap = new Map(newFinancials.map(obj => [obj.year, obj]));
+                for (const f of s.documents as any) {
+                    if (newFinancialMap.has(f.year)) {
+                        newFinancialMap.delete(f.year)
+                    }
+                }
+
+                console.log(`Company exist, financials updating.`)
+                newFinancialMap.forEach(async f => {
+                    f.companyId = savedCompany.$id
+                    await FinancialService.add(f)
+                })
+                toast.current?.show({
+                    severity: 'success',
+                    summary: t('successful'),
+                    detail: t('successful_created'),
+                    life: 3000
+                });
+
+            }
+        )
+    }
+
     const onSelect = async (e: FileUploadSelectEvent) => {
         setSubmitted(true)
         if (e.files && e.files[0]) {
@@ -331,35 +414,25 @@ const CompanyCrud = () => {
                 const pdf = await pdfjs.getDocument(contents as ArrayBuffer).promise;
                 let extracted = await extractLines(pdf);
                 let company = CompanyService.extractCompanyInfo(extracted.lines)
-                debugger
                 company.userId = user.current?.$id
                 console.log(`File uploaded, bilanco generating.`)
-                let {financial, financialPrev} = CompanyService.extractBilanco(extracted.lines, extracted.bilanco, extracted.gelir)
+                let {
+                    financial,
+                    financialPrev
+                } = CompanyService.extractBilanco(extracted.lines, extracted.bilanco, extracted.gelir)
                 console.log(`Bilanco generated, partnership generating.`)
-                let partnerships = CompanyService.extractPartnership(extracted.lines, extracted.ortak)
-                console.log(`Partnership generated, company saving.`)
                 let financials = [financial, financialPrev]
-                CompanyService.add(company).then(async r => {
-                    companies?.push(r as any)
-                    setCompanies(companies);
-
-                    console.log(`Company added, financials saving.`)
-                    for (const f of financials) {
-                        f.companyId = r.$id
-                        await FinancialService.add(f)
+                CompanyService.listByTaxNo(company.taxNo, company.userId).then(
+                    (savedCompany) => {
+                        if (savedCompany.documents.length > 0) {
+                            addNewFinancials(savedCompany.documents[0] as any, financials);
+                        } else {
+                            let partnerships = CompanyService.extractPartnership(extracted.lines, extracted.ortak)
+                            console.log(`Partnership generated, company saving.`)
+                            addNewCompanyInformations(company, financials, partnerships);
+                        }
                     }
-                    console.log(`Financials added, partnerships saving.`)
-                    for (const p of partnerships) {
-                        p.companyId = r.$id
-                        await PartnershipService.add(p)
-                    }
-                    toast.current?.show({severity: 'success', summary: t('successful'), detail: t('successful_created'), life: 3000});
-                }).catch(e => {
-                    debugger
-                    console.log(e)
-                }).finally(() => {
-                    setSubmitted(false)
-                })
+                )
             };
             reader.readAsArrayBuffer(e.files[0]);
         }
@@ -409,7 +482,7 @@ const CompanyCrud = () => {
             <span className="block mt-2 md:mt-0 p-input-icon-left">
                 <i className="pi pi-search"/>
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.currentTarget.value)}
-                           placeholder={t('search' )+ '...'}/>
+                           placeholder={t('search') + '...'}/>
             </span>
         </div>
     );
@@ -452,7 +525,7 @@ const CompanyCrud = () => {
                         <label htmlFor="name"
                                className={classNames({'p-error': isFormFieldValid('name')})}>{t('name')}*</label>
                     </span>
-                    {getFormErrorMessage('name' )}
+                    {getFormErrorMessage('name')}
                 </div>
 
                 <div className="field col-12 md:col-6">
