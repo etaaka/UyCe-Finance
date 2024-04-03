@@ -1,0 +1,496 @@
+{
+  "data": [
+    {
+      "name": "Adana",
+      "code": "TR-01",
+      "nuts": "TR621",
+      "country": "TR"
+    },
+    {
+      "name": "Adıyaman",
+      "code": "TR-02",
+      "nuts": "TRC12",
+      "country": "TR"
+    },
+    {
+      "name": "Afyonkarahisar",
+      "code": "TR-03",
+      "nuts": "TR332",
+      "country": "TR"
+    },
+    {
+      "name": "Ağrı",
+      "code": "TR-04",
+      "nuts": "TRA21",
+      "country": "TR"
+    },
+    {
+      "name": "Aksaray",
+      "code": "TR-68",
+      "nuts": "TR712",
+      "country": "TR"
+    },
+    {
+      "name": "Amasya",
+      "code": "TR-05",
+      "nuts": "TR834",
+      "country": "TR"
+    },
+    {
+      "name": "Ankara",
+      "code": "TR-06",
+      "nuts": "TR510",
+      "country": "TR"
+    },
+    {
+      "name": "Antalya",
+      "code": "TR-07",
+      "nuts": "TR611",
+      "country": "TR"
+    },
+    {
+      "name": "Ardahan",
+      "code": "TR-75",
+      "nuts": "TRA24",
+      "country": "TR"
+    },
+    {
+      "name": "Artvin",
+      "code": "TR-08",
+      "nuts": "TR905",
+      "country": "TR"
+    },
+    {
+      "name": "Aydın",
+      "code": "TR-09",
+      "nuts": "TR321",
+      "country": "TR"
+    },
+    {
+      "name": "Balıkesir",
+      "code": "TR-10",
+      "nuts": "TR221",
+      "country": "TR"
+    },
+    {
+      "name": "Bartın",
+      "code": "TR-74",
+      "nuts": "TR813",
+      "country": "TR"
+    },
+    {
+      "name": "Batman",
+      "code": "TR-72",
+      "nuts": "TRC32",
+      "country": "TR"
+    },
+    {
+      "name": "Bayburt",
+      "code": "TR-69",
+      "nuts": "TRA13",
+      "country": "TR"
+    },
+    {
+      "name": "Bilecik",
+      "code": "TR-11",
+      "nuts": "TR413",
+      "country": "TR"
+    },
+    {
+      "name": "Bingöl",
+      "code": "TR-12",
+      "nuts": "TRB13",
+      "country": "TR"
+    },
+    {
+      "name": "Bitlis",
+      "code": "TR-13",
+      "nuts": "TRB23",
+      "country": "TR"
+    },
+    {
+      "name": "Bolu",
+      "code": "TR-14",
+      "nuts": "TR424",
+      "country": "TR"
+    },
+    {
+      "name": "Burdur",
+      "code": "TR-15",
+      "nuts": "TR613",
+      "country": "TR"
+    },
+    {
+      "name": "Bursa",
+      "code": "TR-16",
+      "nuts": "TR411",
+      "country": "TR"
+    },
+    {
+      "name": "Çanakkale",
+      "code": "TR-17",
+      "nuts": "TR222",
+      "country": "TR"
+    },
+    {
+      "name": "Çankırı",
+      "code": "TR-18",
+      "nuts": "TR822",
+      "country": "TR"
+    },
+    {
+      "name": "Çorum",
+      "code": "TR-19",
+      "nuts": "TR833",
+      "country": "TR"
+    },
+    {
+      "name": "Denizli",
+      "code": "TR-20",
+      "nuts": "TR322",
+      "country": "TR"
+    },
+    {
+      "name": "Diyarbakır",
+      "code": "TR-21",
+      "nuts": "TRC22",
+      "country": "TR"
+    },
+    {
+      "name": "Düzce",
+      "code": "TR-81",
+      "nuts": "TR423",
+      "country": "TR"
+    },
+    {
+      "name": "Edirne",
+      "code": "TR-22",
+      "nuts": "TR212",
+      "country": "TR"
+    },
+    {
+      "name": "Elazığ",
+      "code": "TR-23",
+      "nuts": "TRB12",
+      "country": "TR"
+    },
+    {
+      "name": "Erzincan",
+      "code": "TR-24",
+      "nuts": "TRA12",
+      "country": "TR"
+    },
+    {
+      "name": "Erzurum",
+      "code": "TR-25",
+      "nuts": "TRA11",
+      "country": "TR"
+    },
+    {
+      "name": "Eskişehir",
+      "code": "TR-26",
+      "nuts": "TR412",
+      "country": "TR"
+    },
+    {
+      "name": "Gaziantep",
+      "code": "TR-27",
+      "nuts": "TRC11",
+      "country": "TR"
+    },
+    {
+      "name": "Giresun",
+      "code": "TR-28",
+      "nuts": "TR903",
+      "country": "TR"
+    },
+    {
+      "name": "Gümüşhane",
+      "code": "TR-29",
+      "nuts": "TR906",
+      "country": "TR"
+    },
+    {
+      "name": "Hakkari",
+      "code": "TR-30",
+      "nuts": "TRB24",
+      "country": "TR"
+    },
+    {
+      "name": "Hatay",
+      "code": "TR-31",
+      "nuts": "TR631",
+      "country": "TR"
+    },
+    {
+      "name": "Iğdır",
+      "code": "TR-76",
+      "nuts": "TRA23",
+      "country": "TR"
+    },
+    {
+      "name": "Isparta",
+      "code": "TR-32",
+      "nuts": "TR612",
+      "country": "TR"
+    },
+    {
+      "name": "Istanbul-I (Thrace)",
+      "code": "TR-34",
+      "nuts": "TR100",
+      "country": "TR"
+    },
+    {
+      "name": "Istanbul-II (Anatolia)",
+      "code": "TR-34",
+      "nuts": "TR100",
+      "country": "TR"
+    },
+    {
+      "name": "İzmir",
+      "code": "TR-35",
+      "nuts": "TR310",
+      "country": "TR"
+    },
+    {
+      "name": "Kahramanmaraş",
+      "code": "TR-46",
+      "nuts": "TR632",
+      "country": "TR"
+    },
+    {
+      "name": "Karabük",
+      "code": "TR-78",
+      "nuts": "TR812",
+      "country": "TR"
+    },
+    {
+      "name": "Karaman",
+      "code": "TR-70",
+      "nuts": "TR522",
+      "country": "TR"
+    },
+    {
+      "name": "Kars",
+      "code": "TR-36",
+      "nuts": "TRA22",
+      "country": "TR"
+    },
+    {
+      "name": "Kastamonu",
+      "code": "TR-37",
+      "nuts": "TR821",
+      "country": "TR"
+    },
+    {
+      "name": "Kayseri",
+      "code": "TR-38",
+      "nuts": "TR721",
+      "country": "TR"
+    },
+    {
+      "name": "Kilis",
+      "code": "TR-79",
+      "nuts": "TRC13",
+      "country": "TR"
+    },
+    {
+      "name": "Kırıkkale",
+      "code": "TR-71",
+      "nuts": "TR711",
+      "country": "TR"
+    },
+    {
+      "name": "Kırklareli",
+      "code": "TR-39",
+      "nuts": "TR213",
+      "country": "TR"
+    },
+    {
+      "name": "Kırşehir",
+      "code": "TR-40",
+      "nuts": "TR715",
+      "country": "TR"
+    },
+    {
+      "name": "Kocaeli (İzmit)",
+      "code": "TR-41",
+      "nuts": "TR421",
+      "country": "TR"
+    },
+    {
+      "name": "Konya",
+      "code": "TR-42",
+      "nuts": "TR521",
+      "country": "TR"
+    },
+    {
+      "name": "Kütahya",
+      "code": "TR-43",
+      "nuts": "TR333",
+      "country": "TR"
+    },
+    {
+      "name": "Malatya",
+      "code": "TR-44",
+      "nuts": "TRB11",
+      "country": "TR"
+    },
+    {
+      "name": "Manisa",
+      "code": "TR-45",
+      "nuts": "TR331",
+      "country": "TR"
+    },
+    {
+      "name": "Mardin",
+      "code": "TR-47",
+      "nuts": "TRC31",
+      "country": "TR"
+    },
+    {
+      "name": "Mersin",
+      "code": "TR-33",
+      "nuts": "TR622",
+      "country": "TR"
+    },
+    {
+      "name": "Muğla",
+      "code": "TR-48",
+      "nuts": "TR323",
+      "country": "TR"
+    },
+    {
+      "name": "Muş",
+      "code": "TR-49",
+      "nuts": "TRB22",
+      "country": "TR"
+    },
+    {
+      "name": "Nevşehir",
+      "code": "TR-50",
+      "nuts": "TR714",
+      "country": "TR"
+    },
+    {
+      "name": "Niğde",
+      "code": "TR-51",
+      "nuts": "TR713",
+      "country": "TR"
+    },
+    {
+      "name": "Ordu",
+      "code": "TR-52",
+      "nuts": "TR902",
+      "country": "TR"
+    },
+    {
+      "name": "Osmaniye",
+      "code": "TR-80",
+      "nuts": "TR633",
+      "country": "TR"
+    },
+    {
+      "name": "Rize",
+      "code": "TR-53",
+      "nuts": "TR904",
+      "country": "TR"
+    },
+    {
+      "name": "Sakarya (Adapazarı)",
+      "code": "TR-54",
+      "nuts": "TR422",
+      "country": "TR"
+    },
+    {
+      "name": "Samsun",
+      "code": "TR-55",
+      "nuts": "TR831",
+      "country": "TR"
+    },
+    {
+      "name": "Şanlıurfa",
+      "code": "TR-63",
+      "nuts": "TRC21",
+      "country": "TR"
+    },
+    {
+      "name": "Siirt",
+      "code": "TR-56",
+      "nuts": "TRC34",
+      "country": "TR"
+    },
+    {
+      "name": "Sinop",
+      "code": "TR-57",
+      "nuts": "TR823",
+      "country": "TR"
+    },
+    {
+      "name": "Sivas",
+      "code": "TR-58",
+      "nuts": "TRC33",
+      "country": "TR"
+    },
+    {
+      "name": "Şırnak",
+      "code": "TR-73",
+      "nuts": "TR722",
+      "country": "TR"
+    },
+    {
+      "name": "Tekirdağ",
+      "code": "TR-59",
+      "nuts": "TR211",
+      "country": "TR"
+    },
+    {
+      "name": "Tokat",
+      "code": "TR-60",
+      "nuts": "TR832",
+      "country": "TR"
+    },
+    {
+      "name": "Trabzon",
+      "code": "TR-61",
+      "nuts": "TR901",
+      "country": "TR"
+    },
+    {
+      "name": "Tunceli",
+      "code": "TR-62",
+      "nuts": "TRB14",
+      "country": "TR"
+    },
+    {
+      "name": "Uşak",
+      "code": "TR-64",
+      "nuts": "TR334",
+      "country": "TR"
+    },
+    {
+      "name": "Van",
+      "code": "TR-65",
+      "nuts": "TRB21",
+      "country": "TR"
+    },
+    {
+      "name": "Yalova",
+      "code": "TR-77",
+      "nuts": "TR425",
+      "country": "TR"
+    },
+    {
+      "name": "Yozgat",
+      "code": "TR-66",
+      "nuts": "TR723",
+      "country": "TR"
+    },
+    {
+      "name": "Zonguldak",
+      "code": "TR-67",
+      "nuts": "TR811",
+      "country": "TR"
+    }
+  ]
+}

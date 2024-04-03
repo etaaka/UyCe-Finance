@@ -11,6 +11,8 @@ import {PartnershipService} from "./PartnershipService";
 import {BookkeepingFormat} from "./types/company/BookkeepingFormat";
 import {InvestmentStatus} from "./types/company/InvestmentStatus";
 import {Sector} from "./types/company/Sector";
+import { ReportService } from "./ReportService";
+import { CompanyFileService } from "./CompanyFileService";
 
 export const COMPANIES_DATABASE_ID = "654769c9344dffc7dd50";
 export const COMPANIES_COLLECTION_ID = "654769cf447df20d3035";
@@ -92,6 +94,10 @@ export const CompanyService = {
         await FinancialService.removeAll(financials.documents.map(id => { return id.$id}))
         let partnerships = await PartnershipService.listByCompanyId(id,query)
         await PartnershipService.removeAll(partnerships.documents.map(id => { return id.$id}))
+        let reportFiles = await CompanyFileService.listByCompanyId(id,query)
+        await CompanyFileService.removeAll(reportFiles.documents.map(id => { return id.$id}))
+        let reports = await ReportService.listByCompanyId(id,query)
+        await ReportService.removeAll(reports.documents.map(id => { return id.$id}))
         return await databases.deleteDocument(COMPANIES_DATABASE_ID, COMPANIES_COLLECTION_ID, id);
     },
 

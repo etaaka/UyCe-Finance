@@ -195,6 +195,13 @@ declare namespace Demo {
         code: string;
     };
 
+    type Province = {
+        name: string;
+        code: string;
+        nuts: string;
+        country:string;
+    };
+
     // IconService
     type Icon = {
         icon?: {

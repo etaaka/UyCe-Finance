@@ -21,7 +21,6 @@ export const StorageService = {
         );
     },
 
-
     async add(file: File,bucket : string, fileId: string = ID.unique()) {
         return await storage.createFile(
             bucket,

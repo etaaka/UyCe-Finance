@@ -84,7 +84,9 @@ const LandingPage = () => {
                             <span className="font-light block">{t('landing.hero.title.1')}</span>{t('landing.hero.title.2')}
                         </h1>
                         <p className="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">{t('landing.hero.details')}</p>
-                        <Button type="button" label={t('landing.getStarted')} rounded className="text-xl border-none mt-3 bg-blue-500 font-normal line-height-3 px-3 text-white"></Button>
+                        <Link href="/auth/register">
+                            <Button type="button" label={t('landing.getStarted')} rounded className="text-xl border-none mt-3 bg-blue-500 font-normal line-height-3 px-3 text-white"></Button>
+                        </Link>
                     </div>
                     <div className="flex justify-content-center md:justify-content-end">
                         <img src="/demo/images/landing/screen-1.png" alt="Hero Image" className="w-9 md:w-auto" />
@@ -418,7 +420,9 @@ const LandingPage = () => {
                                 <div className="my-5 text-center">
                                     <span className="text-5xl font-bold mr-2 text-900">{t('landing.pricing.free.price')}</span>
                                     <span className="text-600">{t('landing.pricing.free.per')}</span>
-                                    <Button label={t('landing.pricing.free.started')} rounded className="block mx-auto mt-4 border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
+                                    <Link href="/auth/register">
+                                        <Button label={t('landing.pricing.free.started')} rounded className="block mx-auto mt-4 border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
+                                    </Link>
                                 </div>
                                 <Divider className="w-full bg-surface-200"></Divider>
                                 <ul className="my-5 list-none p-0 flex text-900 flex-column">
@@ -449,7 +453,10 @@ const LandingPage = () => {
                                 <div className="my-5 text-center">
                                     <span className="text-5xl font-bold mr-2 text-900">{t('landing.pricing.pro.price')}</span>
                                     <span className="text-600">{t('landing.pricing.pro.per')}</span>
-                                    <Button label={t('landing.pricing.pro.started')} rounded className="block mx-auto mt-4 border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
+
+                                    <Link href="/auth/register">
+                                        <Button label={t('landing.pricing.pro.started')} rounded className="block mx-auto mt-4 border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
+                                    </Link>
                                 </div>
                                 <Divider className="w-full bg-surface-200"></Divider>
                                 <ul className="my-5 list-none p-0 flex text-900 flex-column">
@@ -481,7 +488,7 @@ const LandingPage = () => {
                                     <span className="text-5xl font-bold mr-2 text-900">{t('landing.pricing.enterprise.price')}</span>
                                     {/*<span className="text-600">per month</span>*/}
                                     <Button label={t('landing.pricing.enterprise.started')} rounded className="block mx-auto mt-4 border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
-                                </div>
+                                  </div>
                                 <Divider className="w-full bg-surface-200"></Divider>
                                 <ul className="my-5 list-none p-0 flex text-900 flex-column">
                                     <li className="py-2">
