@@ -7,8 +7,9 @@ interface SimpleLayoutProps {
 }
 
 export const metadata: Metadata = {
-    title: 'PrimeReact Sakai',
-    description: 'The ultimate collection of design-agnostic, flexible and accessible React UI Components.'
+    title: 'UyCe Financial - İşletmenizin Finansal Geleceğini Şekillendirin',
+    keywords: 'UyCe Financial, finansal danışmanlık, finansal analiz, işletme finansmanı, işletme analizi',
+    description: 'UyCe Financial ile işletmenizin finansal geleceğini şekillendirin. Kapsamlı analiz raporları ve uzman danışmanlık hizmetleri ile finansal başarınızı artırın.'
 };
 
 export default function SimpleLayout({ children }: SimpleLayoutProps) {

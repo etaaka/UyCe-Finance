@@ -6,15 +6,17 @@ interface AppLayoutProps {
 }
 
 export const metadata: Metadata = {
-    title: 'PrimeReact Sakai',
-    description: 'The ultimate collection of design-agnostic, flexible and accessible React UI Components.',
+    title: 'UyCe Financial - İşletmenizin Finansal Geleceğini Şekillendirin',
+    keywords: 'UyCe Financial, finansal danışmanlık, finansal analiz, işletme finansmanı, işletme analizi',
+    description: 'UyCe Financial ile işletmenizin finansal geleceğini şekillendirin. Kapsamlı analiz raporları ve uzman danışmanlık hizmetleri ile finansal başarınızı artırın.',
     robots: { index: false, follow: false },
     viewport: { initialScale: 1, width: 'device-width' },
     openGraph: {
         type: 'website',
-        title: 'PrimeReact SAKAI-REACT',
-        url: 'https://sakai.primereact.org/',
-        description: 'The ultimate collection of design-agnostic, flexible and accessible React UI Components.',
+        title: 'UyCe Financial - İşletmenizin Finansal Geleceğini Şekillendirin',
+        keywords: 'UyCe Financial, finansal danışmanlık, finansal analiz, işletme finansmanı, işletme analizi',
+        url: 'https://www.uyce-finance.com/',
+        description: 'UyCe Financial ile işletmenizin finansal geleceğini şekillendirin. Kapsamlı analiz raporları ve uzman danışmanlık hizmetleri ile finansal başarınızı artırın.',
         images: ['https://www.primefaces.org/static/social/sakai-react.png'],
         ttl: 604800
     },

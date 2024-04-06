@@ -647,11 +647,6 @@ export const FINANCIALS_DATABASE_ID = "654769c9344dffc7dd50";
 export const FINANCIALS_COLLECTION_ID = "65476a3574077c3ce39a";
 
 export const FinancialService = {
-    async getFinancials() {
-        let res = await fetch('/demo/data/financials.json', {headers: {'Cache-Control': 'no-cache'}});
-        let d: any = await res.json();
-        return d.data as Financial[];
-    },
 
     async list(queries: string[] = []) {
         queries.push(Query.orderDesc("$createdAt"), Query.limit(10))
