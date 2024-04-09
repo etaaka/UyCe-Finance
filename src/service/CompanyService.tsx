@@ -1,18 +1,20 @@
-import {Company} from "./types/company/Company";
-import {BeyannameCodes, FinancialService} from "./FinancialService";
-import {databases} from "./appwrite";
-import {ID, Query} from "appwrite";
-import {Financial} from "./types/financial/Financial";
-import {FinancialLine} from "./types/financial/line/FinancialLine";
-import {Partnership} from "./types/partnership/Partnership";
-import {Contact} from "./types/contact/Contact";
-import {PartnershipDuty} from "./types/partnership/PartnershipDuty";
-import {PartnershipService} from "./PartnershipService";
-import {BookkeepingFormat} from "./types/company/BookkeepingFormat";
-import {InvestmentStatus} from "./types/company/InvestmentStatus";
-import {Sector} from "./types/company/Sector";
+import { Company } from "./types/company/Company";
+import { BeyannameCodes, FinancialService } from "./FinancialService";
+import { databases } from "./appwrite";
+import { ID, Query } from "appwrite";
+import { Financial } from "./types/financial/Financial";
+import { FinancialLine } from "./types/financial/line/FinancialLine";
+import { Partnership } from "./types/partnership/Partnership";
+import { Contact } from "./types/contact/Contact";
+import { PartnershipDuty } from "./types/partnership/PartnershipDuty";
+import { PartnershipService } from "./PartnershipService";
+import { BookkeepingFormat } from "./types/company/BookkeepingFormat";
+import { InvestmentStatus } from "./types/company/InvestmentStatus";
+import { Sector } from "./types/company/Sector";
 import { ReportService } from "./ReportService";
 import { CompanyFileService } from "./CompanyFileService";
+import { BoardOfDirectorType } from "./types/partnership/BoardOfDirectorType";
+import { SeniorManagementType } from "./types/partnership/SeniorManagementType";
 
 export const COMPANIES_DATABASE_ID = "654769c9344dffc7dd50";
 export const COMPANIES_COLLECTION_ID = "654769cf447df20d3035";
@@ -174,10 +176,12 @@ export const CompanyService = {
         partner.name = cells[7]
         partner.duties = []
         if(cells[2] == "*"){
-            partner.duties.push(PartnershipDuty.MANAGER)
+            partner.duties.push(PartnershipDuty.GENERAL_MANAGER)
+            partner.seniorManagementType = SeniorManagementType.GENERAL_MANAGER
         }
         if(cells[3] == "*"){
             partner.duties.push(PartnershipDuty.BOARD_MEMBER)
+            partner.boardOfDirectorType = BoardOfDirectorType.BOARD_MEMBER
         }
         if(cells[4] == "*"){
             partner.duties.push(PartnershipDuty.PARTNER)

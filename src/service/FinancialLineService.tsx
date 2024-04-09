@@ -1,7 +1,7 @@
 import {databases} from "./appwrite";
 import {ID, Query} from "appwrite";
-import {Financial} from "./types/financial/Financial";
 import {FinancialLine} from "./types/financial/line/FinancialLine";
+import { FINANCIALS_COLLECTION_ID, FINANCIALS_DATABASE_ID } from "./FinancialService";
 
 export const FINANCIAL_LINES_DATABASE_ID = "654769c9344dffc7dd50";
 export const FINANCIAL_LINES_COLLECTION_ID = "65476be4ee6387964adb";
@@ -13,6 +13,15 @@ export const FinancialLineService = {
             FINANCIAL_LINES_DATABASE_ID,
             FINANCIAL_LINES_COLLECTION_ID,
             [Query.orderDesc("$createdAt"), Query.limit(10)]
+        );
+    },
+
+    async listByCompanyId(companyId: string, queries: string[] = []) {
+        queries.push(Query.equal("companyId", companyId))
+        return await databases.listDocuments(
+          FINANCIALS_DATABASE_ID,
+          FINANCIALS_COLLECTION_ID,
+          queries
         );
     },
 

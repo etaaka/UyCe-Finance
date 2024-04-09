@@ -1,5 +1,8 @@
 import {Contact} from "../contact/Contact";
 import {PartnershipDuty} from "./PartnershipDuty";
+import { BoardOfDirectorType } from "./BoardOfDirectorType";
+import { SeniorManagementType } from "./SeniorManagementType";
+import { Education } from "./Education";
 
 export class Partnership {
     $id?: string;
@@ -12,7 +15,10 @@ export class Partnership {
     passport?: string
     shareRatio?: number
     duties : PartnershipDuty[] = []
-    duty? : PartnershipDuty
+    education?: Education
+    experienceYear?: number
+    boardOfDirectorType? : BoardOfDirectorType
+    seniorManagementType? : SeniorManagementType
     contact : Contact = new Contact()
 }
 
