@@ -282,10 +282,17 @@ const CompanyComponent = () => {
                         </div>
                         <div className="field col-12 md:col-6">
                             <span className="p-float-label">
-                                <InputMask id="tel" mask="(999) 999-9999" value={company.contact.telNo|| ""} 
-                                           onChange={(e) => onContactInputChange(e, 'telNo')}/>
-                                <label htmlFor="tel">{t('company.tel')}</label>
+                                <InputMask id="faxNo" mask="(999) 999-9999" value={company.contact.faxNo|| ""}
+                                           onChange={(e) => onContactInputChange(e, 'faxNo')}/>
+                                <label htmlFor="faxNo">{t('company.faxNo')}</label>
                             </span>
+                        </div>
+                        <div className='field col-12 md:col-6'>
+                        <span className='p-float-label'>
+                            <InputMask id='fax' mask='(999) 999-9999' value={company.contact}
+                                       onChange={(e) => onContactInputChange(e, 'faxNo')} />
+                            <label htmlFor='fax'>{t('partnership.faxNo')}</label>
+                        </span>
                         </div>
                         <div className="field col-12 md:col-6">
                             <span className="p-float-label">

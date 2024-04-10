@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Panel } from 'primereact/panel';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
@@ -11,13 +11,41 @@ import { FinancialLine } from '../../../../service/types/financial/line/Financia
 import { Affiliate } from '../../../../service/types/affiliate/Affiliate';
 import { AffiliateType } from '../../../../service/types/affiliate/AffiliateType';
 import { Bank } from '../../../../service/types/bank/Bank';
+import { CompanyService } from '../../../../service/CompanyService';
+import { FinancialService } from '../../../../service/FinancialService';
+import { FinancialLineService } from '../../../../service/FinancialLineService';
+import { useRouter } from 'next/navigation';
+import { useUser } from '../../../../layout/context/usercontext';
+import { useTranslation } from "react-i18next";
+import { Company } from '../../../../service/types/company/Company';
+import { Financial } from '../../../../service/types/financial/Financial';
+import { BookkeepingFormat } from '../../../../service/types/company/BookkeepingFormat';
+import { InvestmentStatus } from '../../../../service/types/company/InvestmentStatus';
+import { Sector } from '../../../../service/types/company/Sector';
+import { Contact } from '../../../../service/types/contact/Contact';
+import { PartnershipService } from '../../../../service/PartnershipService';
 
-const PanelDemo = () => {
-
+const BasicReport = () => {
+    let emptyCompany: Company = {
+        bookkeepingFormat: BookkeepingFormat.VUK,
+        employeeNumber: 0,
+        investmentStatus: InvestmentStatus.NO_INVESTMENT,
+        sector: Sector.A,
+        taxNo: "",
+        tradeRegisterNo: "",
+        turnover: 0,
+        contact: new Contact(),
+        name: ''
+    };
     const [partnerships, setPartnerships] = useState<Partnership[]>([]);
     const [affiliates, setAffiliates] = useState<Affiliate[]>([]);
     const [banks, setBanks] = useState<Bank[]>([]);
     const [ithalat, setIthalat] = useState<FinancialLine[]>([]);
+    const [company, setCompany] = useState<Company>( emptyCompany);
+    const [financials, setFinancials] = useState<Financial[]>();
+    const router = useRouter();
+    const user = useUser();
+    const {t} = useTranslation();
 
     const formatCurrency = (value: number) => {
         return value?.toLocaleString('en-US', {
@@ -34,6 +62,22 @@ const PanelDemo = () => {
 
         return formatCurrency(total);
     };
+
+    useEffect(() => {
+        if (!user.loadingUser) {
+            if (user.company == null) {
+                router.push('/companies')
+            } else {
+                CompanyService.get(user.company.$id!).then(c => {
+                    setCompany({...(c as any)});
+                    PartnershipService.listByCompanyId(company.$id).then(value => {
+                        debugger
+                        setPartnerships(value as any)
+                    })
+                })
+            }
+        }
+    }, [user.current, user.loadingUser]);
 
     const footerGroup = (
         <ColumnGroup>
@@ -67,7 +111,7 @@ const PanelDemo = () => {
                                 <span className='text-900 line-height-3'>Şirket Ünvanı</span>
                             </div>
                             <div className='col-12 mb-2 lg:col-9 lg:mb-0'>
-                                <span className='text-700 line-height-3'>: XYZ Anonim Şirketi</span>
+                                <span className='text-700 line-height-3'>: {company.name}</span>
                             </div>
                         </div>
                         <div className='grid formgrid'>
@@ -75,8 +119,7 @@ const PanelDemo = () => {
                                 <span className='text-900 line-height-3'>Adres</span>
                             </div>
                             <div className='col-12 mb-2 lg:col-9 lg:mb-0'>
-                                <span
-                                    className='text-700 line-height-3'>: ……………………… Cad. No: 12 …………….. / İstanbul</span>
+                                <span className='text-700 line-height-3'>: {company.contact.address}</span>
                             </div>
                         </div>
                         <div className='grid formgrid'>
@@ -84,7 +127,7 @@ const PanelDemo = () => {
                                 <span className='text-900 line-height-3'>Telefon</span>
                             </div>
                             <div className='col-12 mb-2 lg:col-9 lg:mb-0'>
-                                <span className='text-700 line-height-3'>: 0216 000 00 00</span>
+                                <span className='text-700 line-height-3'>: {company.contact.telNo}</span>
                             </div>
                         </div>
                         <div className='grid formgrid'>
@@ -92,7 +135,7 @@ const PanelDemo = () => {
                                 <span className='text-900 line-height-3'>Faks</span>
                             </div>
                             <div className='col-12 mb-2 lg:col-9 lg:mb-0'>
-                                <span className='text-700 line-height-3'>: 0216 000 00 00</span>
+                                <span className='text-700 line-height-3'>: -</span>
                             </div>
                         </div>
                         <div className='grid formgrid'>
@@ -100,7 +143,7 @@ const PanelDemo = () => {
                                 <span className='text-900 line-height-3'>E-mail</span>
                             </div>
                             <div className='col-12 mb-2 lg:col-9 lg:mb-0'>
-                                <span className='text-700 line-height-3'>: maliXYZ@XYZ.com.tr</span>
+                                <span className='text-700 line-height-3'>: {company.contact.email}</span>
                             </div>
                         </div>
                         <div className='grid formgrid'>
@@ -108,7 +151,7 @@ const PanelDemo = () => {
                                 <span className='text-900 line-height-3'>Web Sayfası</span>
                             </div>
                             <div className='col-12 mb-2 lg:col-9 lg:mb-0'>
-                                <span className='text-700 line-height-3'>: www.XYZ kurumsal.com</span>
+                                <span className='text-700 line-height-3'>: {company.contact.website}</span>
                             </div>
                         </div>
                     </Panel>
@@ -184,7 +227,7 @@ const PanelDemo = () => {
                                 <span className='text-900 line-height-3'>Kuruluş Tarihi</span>
                             </div>
                             <div className='col-12 mb-2 lg:col-9 lg:mb-0'>
-                                <span className='text-700 line-height-3'>: 19/03/2008</span>
+                                <span className='text-700 line-height-3'>: {company.establishmentDate}</span>
                             </div>
                         </div>
                         <div className='grid formgrid'>
@@ -200,7 +243,7 @@ const PanelDemo = () => {
                                 <span className='text-900 line-height-3'>Ticaret Sicil No</span>
                             </div>
                             <div className='col-12 mb-2 lg:col-9 lg:mb-0'>
-                                <span className='text-700 line-height-3'>: -5-8-6</span>
+                                <span className='text-700 line-height-3'>: {company.tradeRegisterNo}</span>
                             </div>
                         </div>
                         <div className='grid formgrid'>
@@ -208,8 +251,7 @@ const PanelDemo = () => {
                                 <span className='text-900 line-height-3'>Vergi Dairesi/No</span>
                             </div>
                             <div className='col-12 mb-2 lg:col-9 lg:mb-0'>
-                                <span
-                                    className='text-700 line-height-3'>: Büyük Mükellefler Vergi Dairesi / -2-0-2-5-3</span>
+                                <span className='text-700 line-height-3'>: {company.taxAdministration}/{company.taxNo}</span>
                             </div>
                         </div>
                         <div className='grid formgrid'>
@@ -217,7 +259,7 @@ const PanelDemo = () => {
                                 <span className='text-900 line-height-3'>Çalışan Sayısı</span>
                             </div>
                             <div className='col-12 mb-2 lg:col-9 lg:mb-0'>
-                                <span className='text-700 line-height-3'>: 17.478</span>
+                                <span className='text-700 line-height-3'>: {company.employeeNumber}</span>
                             </div>
                         </div>
                         <div className='grid formgrid'>
@@ -418,4 +460,4 @@ const PanelDemo = () => {
     );
 };
 
-export default PanelDemo;
+export default BasicReport;

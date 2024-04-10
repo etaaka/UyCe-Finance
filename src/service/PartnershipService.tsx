@@ -3,6 +3,9 @@ import {ID, Query} from "appwrite";
 import {Partnership} from "./types/partnership/Partnership";
 import {PartnershipDuty} from "./types/partnership/PartnershipDuty";
 import {useTranslation} from "react-i18next";
+import { SeniorManagementType } from './types/partnership/SeniorManagementType';
+import { Education } from './types/partnership/Education';
+import { BoardOfDirectorType } from './types/partnership/BoardOfDirectorType';
 
 export const PARTNERSHIPS_DATABASE_ID = "654769c9344dffc7dd50";
 export const PARTNERSHIPS_COLLECTION_ID = "656a008434bc12bc40e1";
@@ -13,6 +16,29 @@ export const PartnershipService = {
         let list = []
         for (let partnershipDuty in PartnershipDuty) {
             list.push({ name: t('PartnershipDuty.' + partnershipDuty), code: partnershipDuty })
+        }
+        return list
+    },
+    getSeniorManagementTypes(t: any) {
+        let list = []
+        for (let managementType in SeniorManagementType) {
+            list.push({ name: t('SeniorManagementType.' + managementType), code: managementType })
+        }
+        return list
+    },
+
+    getEducations(t: any) {
+        let list = []
+        for (let education in Education) {
+            list.push({ name: t('Education.' + education), code: education })
+        }
+        return list
+    },
+
+    getBoardOfDirectorTypes(t: any) {
+        let list = []
+        for (let boardOfDirectorType in BoardOfDirectorType) {
+            list.push({ name: t('BoardOfDirectorType.' + boardOfDirectorType), code: boardOfDirectorType })
         }
         return list
     },

@@ -6,6 +6,7 @@ export class Contact {
     address?: string = "";
     city?: string = "";
     telNo? : string = "";
+    faxNo? : string = "";
     email: string  = "";
     website?: string = "";
 }
