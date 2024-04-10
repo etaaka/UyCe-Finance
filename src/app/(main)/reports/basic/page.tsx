@@ -266,9 +266,8 @@ const PanelDemo = () => {
                         <DataTable
                             value={partnerships.filter(value => value.shareRatio != null && value.shareRatio != 0)}
                             footerColumnGroup={footerGroup}>
-                            <Column field='name' header='Adı Soyadı-Ticari Ünvanı' style={{ width: '50%' }} />
-                            <Column field='price' header='(%)' style={{ width: '50%' }}
-                                    body={(data) => formatCurrency(data.price)} />
+                            <Column field='name' header='Adı Soyadı-Ticari Ünvanı' />
+                            <Column field='price' header='(%)' body={(data) => formatCurrency(data.price)} />
                         </DataTable>
 
                         <DataTable value={partnerships.filter(value => value.boardOfDirectorType != null)}
@@ -280,11 +279,11 @@ const PanelDemo = () => {
 
                         <DataTable value={partnerships.filter(value => value.seniorManagementType != null)}
                                    header='ÜST YÖNETİM'>
-                            <Column field='name' header='Adı' style={{ width: '20%' }} />
-                            <Column field='surname' header='Soyadı' style={{ width: '20%' }} />
-                            <Column field='seniorManagementType' header='Ünvan' style={{ width: '20%' }} />
-                            <Column field='education' header='Eğitim' style={{ width: '20%' }} />
-                            <Column field='experienceYear' header='Deneyim (Yıl)' style={{ width: '20%' }} />
+                            <Column field='name' header='Adı' />
+                            <Column field='surname' header='Soyadı'  />
+                            <Column field='seniorManagementType' header='Ünvan' />
+                            <Column field='education' header='Eğitim'  />
+                            <Column field='experienceYear' header='Deneyim (Yıl)' />
                         </DataTable>
                     </Panel>
                     <Panel header='FAALİYET İLE İLGİLİ BİLGİLER' toggleable>
