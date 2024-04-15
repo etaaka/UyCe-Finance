@@ -12,8 +12,6 @@ import { Affiliate } from '../../../../service/types/affiliate/Affiliate';
 import { AffiliateType } from '../../../../service/types/affiliate/AffiliateType';
 import { Bank } from '../../../../service/types/bank/Bank';
 import { CompanyService } from '../../../../service/CompanyService';
-import { FinancialService } from '../../../../service/FinancialService';
-import { FinancialLineService } from '../../../../service/FinancialLineService';
 import { useRouter } from 'next/navigation';
 import { useUser } from '../../../../layout/context/usercontext';
 import { useTranslation } from "react-i18next";
@@ -24,6 +22,9 @@ import { InvestmentStatus } from '../../../../service/types/company/InvestmentSt
 import { Sector } from '../../../../service/types/company/Sector';
 import { Contact } from '../../../../service/types/contact/Contact';
 import { PartnershipService } from '../../../../service/PartnershipService';
+import { AffiliateService } from '../../../../service/AffiliateService';
+import { FinancialService } from '../../../../service/FinancialService';
+import { FinancialReportLine } from '../../../../service/types/financial/line/dto/FinancialReportLine';
 
 const BasicReport = () => {
     let emptyCompany: Company = {
@@ -37,30 +38,36 @@ const BasicReport = () => {
         contact: new Contact(),
         name: ''
     };
-    const [partnerships, setPartnerships] = useState<Partnership[]>([]);
-    const [affiliates, setAffiliates] = useState<Affiliate[]>([]);
+    const [ortaklik, setOrtaklik] = useState<Partnership[]>([]);
+    const [yonetimKurulu, setYonetimKurulu] = useState<Partnership[]>([]);
+    const [ustYonetim, setUstYonetim] = useState<Partnership[]>([]);
+    const [istirakler, setIstirakler] = useState<Affiliate[]>([]);
+    const [bagliOrtakliklar, setBagliOrtakliklar] = useState<Affiliate[]>([]);
+
     const [banks, setBanks] = useState<Bank[]>([]);
     const [ithalat, setIthalat] = useState<FinancialLine[]>([]);
     const [company, setCompany] = useState<Company>( emptyCompany);
     const [financials, setFinancials] = useState<Financial[]>();
+    const [financialReportLines, setFinancialReportLines] = useState<FinancialReportLine[]>();
     const router = useRouter();
     const user = useUser();
     const {t} = useTranslation();
 
-    const formatCurrency = (value: number) => {
-        return value?.toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD'
-        });
-    };
     const toplam = () => {
         let total = 0;
 
-        for (let partner of partnerships) {
+        for (let partner of ortaklik) {
             total += partner.shareRatio;
         }
+        return total;
+    };
 
-        return formatCurrency(total);
+    const convertToReportLine = () => {
+        financials?.forEach(value => {
+            value.actualLines
+        })
+        const rl: FinancialReportLine = new FinancialReportLine()
+        rl.key
     };
 
     useEffect(() => {
@@ -70,9 +77,17 @@ const BasicReport = () => {
             } else {
                 CompanyService.get(user.company.$id!).then(c => {
                     setCompany({...(c as any)});
-                    PartnershipService.listByCompanyId(company.$id).then(value => {
-                        debugger
-                        setPartnerships(value as any)
+                    PartnershipService.listByCompanyId(user.company?.$id).then(value => {
+                        setOrtaklik(value.documents.filter(value1 => value1.shareRatio != null && value1.shareRatio != 0))
+                        setYonetimKurulu(value.documents.filter(value1 => value1.boardOfDirectorType != null))
+                        setUstYonetim(value.documents.filter(value1 => value1.seniorManagementType != null))
+                    })
+                    AffiliateService.listByCompanyId(user.company?.$id).then(value => {
+                        setBagliOrtakliklar(value.documents.filter(value1 => value1.affiliateType == AffiliateType.AFFILIATE_PARTNERSHIP))
+                        setIstirakler(value.documents.filter(value1 => value1.affiliateType == AffiliateType.AFFILIATE))
+                    })
+                    FinancialService.listByCompanyId(user.company?.$id).then(value => {
+                        setFinancials(value.documents)
                     })
                 })
             }
@@ -305,22 +320,18 @@ const BasicReport = () => {
                     </Panel>
                     <Panel header='ORTAKLIK YAPISI VE YÖNETİM KADROSU' toggleable>
                         <span className='text-900 line-height-3'>1 Aralık 2011 itibariyle Ortaklık Yapısı:</span>
-                        <DataTable
-                            value={partnerships.filter(value => value.shareRatio != null && value.shareRatio != 0)}
-                            footerColumnGroup={footerGroup}>
+                        <DataTable value={ortaklik} footerColumnGroup={footerGroup}>
                             <Column field='name' header='Adı Soyadı-Ticari Ünvanı' />
-                            <Column field='price' header='(%)' body={(data) => formatCurrency(data.price)} />
+                            <Column field='shareRatio' header='(%)' />
                         </DataTable>
 
-                        <DataTable value={partnerships.filter(value => value.boardOfDirectorType != null)}
-                                   header='YÖNETİM KURULU'>
+                        <DataTable value={yonetimKurulu} header='YÖNETİM KURULU'>
                             <Column field='name' header='Adı' style={{ width: '20%' }} />
                             <Column field='surname' header='Soyadı' style={{ width: '20%' }} />
                             <Column field='boardOfDirectorType' header='Ünvan' style={{ width: '60%' }} />
                         </DataTable>
 
-                        <DataTable value={partnerships.filter(value => value.seniorManagementType != null)}
-                                   header='ÜST YÖNETİM'>
+                        <DataTable value={ustYonetim} header='ÜST YÖNETİM'>
                             <Column field='name' header='Adı' />
                             <Column field='surname' header='Soyadı'  />
                             <Column field='seniorManagementType' header='Ünvan' />
@@ -353,15 +364,12 @@ const BasicReport = () => {
                             ))}
                         </DataTable>
 
-                        <DataTable value={affiliates.filter(value => value.affiliateType == AffiliateType.AFFILIATE)}
-                                   header='İştirakler'>
+                        <DataTable value={istirakler} header='İştirakler'>
                             <Column field='name' header='Unvan' style={{ width: '20%' }} />
                             <Column field='country' header='Ülke' style={{ width: '20%' }} />
                             <Column field='activity' header='Faaliyet Konusu' style={{ width: '60%' }} />
                         </DataTable>
-                        <DataTable
-                            value={affiliates.filter(value => value.affiliateType == AffiliateType.AFFILIATE_PARTNERSHIP)}
-                            header='Bağlı Ortaklıklar'>
+                        <DataTable value={bagliOrtakliklar} header='Bağlı Ortaklıklar'>
                             <Column field='name' header='Unvan' style={{ width: '20%' }} />
                             <Column field='country' header='Ülke' style={{ width: '20%' }} />
                             <Column field='activity' header='Faaliyet Konusu' style={{ width: '60%' }} />
@@ -439,10 +447,27 @@ const BasicReport = () => {
 
                     <Panel header='ŞİRKETİN RİSK PROFİLİ' toggleable>
                         <p>
-                            Şubat 2008’de KLM Holding A.Ş. tarafından XYZ ’un %50,83 oranındaki hissesinin, ABC
-                            Perakendecilik ve T.A.Ş.’ye devredilmesine ilişkin hisse devir sözleşmesi imzalanmış ve
-                            hisse devri 30 Mayıs 2008’de tamamlanmıştır. XYZ Ticaret A.Ş. (Eski Unvanı:ABC
-                            Perakendecilik ve T.A.Ş.) ve XYZ Türk T.A.Ş. 30 Nisan 2009’da birleşmiştir.
+                            2011 yılında firmanın bilanço büyüklüğü %1,6 azalış ile 5,5 milyar TL’ye düşmüştür. Dönen varlıkların aktifler
+                            içindeki payı 2010 yılında %31,4 iken, 2011 yılında %32,8 olarak gerçekleşmiştir. Duran varlıkların aktifler
+                            içindeki payı ise 2010 yılında %68,6 iken, 2011 yılında %67,2 olarak gerçekleşmiştir. Duran varlıklar içinde en
+                            önemli kalemler 1,1 milyar TL maddi duran varlıklar ve 2,3 Milyar TL ile şerefiye’dir. 2011 yılında firmanın
+                            aktiflerinin %21,8’i özkaynaklarla, %78,2’si yabancı kaynaklar ile finanse edilmiştir. Firmanın kaldıraç oranı 2011
+                            yılında %65 olan perakende sektörünün üzerindedir. Ayrıca perakende sektörü özkaynaklarının 1,8 katı kadar
+                            borçlanırken XYZ ’ta bu oran 3,5 katıdır. Firmanın borçlanma katsayısı yıllar itibari ile artma trendindeyken,
+                            özkaynak karlılığı ise azalış trendindedir. Bu durum firmanın finansal kaldıraç oranının olumsuz etkilemektedir.
+                            Firma 2011 yılında aktiflerinin %47,2’sini banka kredileri ile finanse etmiştir.
+                        </p>
+                        <p>
+                            Firma 2011 yılında satış gelirlerini %11,5 arttırarak 5,8 milyar TL’ye yükselmesine rağmen, firmanın net kambiyo
+                            zararının %600 artması nedeni ile firma 2011 yılını zarar ile kapatmıştır. Firmanın gelirlerinin %93,8’ini
+                            Türkiye’den sağlamasına rağmen finansal borçlarının yabancı para cinsinden olması kur riskine maruz kalmasına
+                            neden olmaktadır. Firmanın likidite oranında bir önceki yıla göre artış göstermektedir. 2011 yılında asit test
+                            oranı %0,71, cari oranı ise %1,19 olarak gerçekleşmiştir. Firmanın net faaliyet marjı ise sektörün çok üstündedir.
+                            Firma pozitif net işletme sermayesi ile faaliyetlerini devam ettirmektedir. Ancak sektörde net işletme
+                            sermayesinin aktiflere oranı %13,9 iken firmada bu oran %9’da kalmıştır.
+                            Şirket 2011 yılında zarar etmiş olması, borçlanma oranlarının yüksek olması, buna rağmen net faaliyet marjının
+                            ve likidite oranlarının pozitif görünümde olması nedeni ile Orta Risk Grubunda değerlendirmemize neden
+                            olmuştur.
                         </p>
                     </Panel>
 

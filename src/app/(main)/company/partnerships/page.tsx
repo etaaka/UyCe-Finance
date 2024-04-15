@@ -394,7 +394,7 @@ const PartnershipCrud = () => {
                 </span>
                     {getFormErrorMessage('shareRatio')}
                 </div>
-                <div className='field col-12'>
+                <div className='field col-12 md:col-6'>
                 <span className='p-float-label'>
                     <MultiSelect id='duties' value={partnership.duties} options={PartnershipService.getDuties(t)}
                                  placeholder={t('partnership.selectDuty')} display='chip' optionLabel='name'
@@ -407,7 +407,7 @@ const PartnershipCrud = () => {
                 </span>
                     {getFormErrorMessage('duties')}
                 </div>
-                <div className='field col-12'>
+                <div className='field col-12 md:col-6'>
                 <span className='p-float-label'>
                     <Dropdown id='seniorManagementType' value={partnership.seniorManagementType}
                               options={PartnershipService.getSeniorManagementTypes(t)}
@@ -417,12 +417,12 @@ const PartnershipCrud = () => {
                               className={classNames({ 'p-invalid': isFormFieldValid('seniorManagementType') })} />
                     <label htmlFor='seniorManagementType'
                            className={classNames({ 'p-error': isFormFieldValid('seniorManagementType') })}>
-                        {t('partnership.seniorManagementType')}*
+                        {t('partnership.seniorManagementType')}
                     </label>
                 </span>
                     {getFormErrorMessage('seniorManagementType')}
                 </div>
-                <div className='field col-12'>
+                <div className='field col-12 md:col-6'>
                 <span className='p-float-label'>
                     <Dropdown id='education' value={partnership.education}
                               options={PartnershipService.getEducations(t)}
@@ -432,12 +432,12 @@ const PartnershipCrud = () => {
                               className={classNames({ 'p-invalid': isFormFieldValid('education') })} />
                     <label htmlFor='education'
                            className={classNames({ 'p-error': isFormFieldValid('education') })}>
-                        {t('partnership.education')}*
+                        {t('partnership.education')}
                     </label>
                 </span>
                     {getFormErrorMessage('education')}
                 </div>
-                <div className='field col-12'>
+                <div className='field col-12 md:col-6'>
                 <span className='p-float-label'>
                     <Dropdown id='boardOfDirectorType' value={partnership.boardOfDirectorType}
                               options={PartnershipService.getBoardOfDirectorTypes(t)}
@@ -445,15 +445,15 @@ const PartnershipCrud = () => {
                               optionLabel='name' optionValue='code'
                               onChange={(e) => onInputChange(e, 'boardOfDirectorType')}
                               className={classNames({ 'p-invalid': isFormFieldValid('boardOfDirectorType') })} />
-                    <label htmlFor='education'
+                    <label htmlFor='boardOfDirectorType'
                            className={classNames({ 'p-error': isFormFieldValid('boardOfDirectorType') })}>
-                        {t('partnership.education')}*
+                        {t('partnership.boardOfDirectorType')}
                     </label>
                 </span>
                     {getFormErrorMessage('boardOfDirectorType')}
                 </div>
 
-                <div className='field col-12'>
+                <div className='field col-12 md:col-6'>
                 <span className='p-float-label'>
                     <InputTextarea id='address' value={partnership.contact.address} rows={4}
                                    onChange={(e) => onContactInputChange(e, 'address')} />

@@ -23,6 +23,7 @@ const AppMenu = () => {
             items: [
                 { label: t('menu.company'), icon: 'pi pi-fw pi-briefcase', to: '/company'},
                 { label: t('menu.partnerships'), icon: 'pi pi-fw pi-percentage', to: '/company/partnerships'},
+                { label: t('menu.affiliate'), icon: 'pi pi-fw pi-percentage', to: '/company/affiliates'},
                 { label: t('menu.financials'), icon: 'pi pi-fw pi-money-bill', to: '/company/financials'},
                 { label: t('menu.files'), icon: 'pi pi-fw pi-money-bill', to: '/company/files'}
             ]
